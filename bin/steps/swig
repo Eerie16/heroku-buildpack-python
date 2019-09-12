@@ -1,0 +1,18 @@
+#!/usr/bin/env bash
+
+# Syntax sugar.
+# shellcheck source=bin/utils
+source "$BIN_DIR/utils"
+
+# If endesive exists within requirements, use vendored swig.
+if (pip-grep -s requirements.txt endesive &> /dev/null) then
+    echo "---> Found endesive. Linking swig"
+    mkdir -p "$HOME/.heroku/bin"
+    ln -fs "$(which swig3.0)" "$HOME/.heroku/bin/swig"
+    ls -l "$HOME/.heroku/bin" | grep -i swig
+    echo "$PATH"
+    # /app/.heroku/bin/swig --help
+    # /usr/bin/swig3.0 --help
+    which swig3.0
+    which swig
+fi
